@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int rows = 5, cols = 6;
+    int matrix[5][6] = {
+        {0, 0, 0, 0, 9, 0},
+        {0, 8, 0, 0, 0, 0},
+        {4, 0, 0, 2, 0, 0},
+        {0, 0, 0, 0, 0, 5},
+        {0, 0, 2, 0, 0, 0}
+    };
+
+    cout << "Original Matrix:\n";
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // Count non-zero elements
+    int count = 0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (matrix[i][j] != 0)
+                count++;
+        }
+    }
+
+    // Triplet representation
+    int triplet[10][3];
+    triplet[0][0] = rows;
+    triplet[0][1] = cols;
+    triplet[0][2] = count;
+
+    int k = 1;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (matrix[i][j] != 0) {
+                triplet[k][0] = i;
+                triplet[k][1] = j;
+                triplet[k][2] = matrix[i][j];
+                k++;
+            }
+        }
+    }
+
+    // Display Triplet matrix
+    cout << "\nSparse Matrix in Triplet Form:\n";
+    cout << "Row\tColumn\tValue\n";
+    for (int i = 0; i <= count; i++) {
+        cout << triplet[i][0] << "\t" << triplet[i][1] << "\t" << triplet[i][2] << endl;
+    }
+
+    return 0;
+}
